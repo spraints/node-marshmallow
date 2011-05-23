@@ -17,6 +17,14 @@ Fs.readFile('config.yml', "utf8", function(err, data) {
     console.log(config);
     
     marshmallow(config, function(bot) {
+      bot.on("^!hello", function(hello, speaker) {
+        this.speak("Hello there, " + speaker.name);
+      });
+      
+      // PT story link
+      bot.on("^!pt (.+)", function(story_id) {
+        this.speak("https://www.pivotaltracker.com/story/show/" + story_id);
+      });      
       
       // Basic ping function
       bot.on("^!ping", function(ping) {
@@ -25,13 +33,16 @@ Fs.readFile('config.yml', "utf8", function(err, data) {
       
       // Spit out what tricks this doggy knows
       bot.on("^!tricks", function(command) {
-        var tricks = [ 'ping', 'tricks' ];
+        var tricks = [ ];
         for(trick in bot.tricks()) {
           if (trick != 'catchAll') { tricks.push(trick.replace(/\^/, '')); }
         }
         this.speak("I know the following tricks: " + tricks.join(', '));
       });
-      
+
+      bot.on('catchAll', function(rawMessage) {
+        this.speak(rawMessage.body.split(" ").reverse.join(" "));
+      });
     });
     
   } catch (err) {
