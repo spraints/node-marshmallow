@@ -1,0 +1,6 @@
+---
+  campfire:
+    token:   'YOUR_TOKEN_HERE'
+    account: 'YOUR_CAMPFIRE_SUBDOMAIN'
+    ssl:     true
+    room_id: YOUR_ROOM_NUMBER
