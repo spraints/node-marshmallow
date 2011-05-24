@@ -15,6 +15,9 @@ fs.readFile 'config.yml', "utf8", (e, data) ->
     
     marshmallow config, (bot) ->
 
+      bot.on '^!blame (.*)', (blamee, speaker) ->
+        this.speak "It's all #{blamee}'s fault"
+
       bot.on '^!out (.*)', (reason, speaker) ->
         this.speak "Have fun, #{speaker.name}"
         users_out[speaker.id] = reason
