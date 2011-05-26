@@ -15,26 +15,26 @@ fs.readFile 'config.yml', "utf8", (e, data) ->
     
     marshmallow config, (bot) ->
 
-      bot.on '^!blame (.*)', (blamee, speaker) ->
+      bot.cmd 'blame', (speaker, blamee) ->
         this.speak "It's all #{blamee}'s fault"
 
-      bot.on '^!out (.*)', (reason, speaker) ->
+      bot.cmd 'out', (speaker, reason) ->
         this.speak "Have fun, #{speaker.name}"
         users_out[speaker.id] = reason
 
       # PT story link
-      bot.on '^!pt (.+)', (story_id, speaker) ->
+      bot.cmd 'pt', (speaker, story_id) ->
         this.speak "https://www.pivotaltracker.com/story/show/#{story_id}"
 
-      bot.on '^!hello', (command, speaker) ->
+      bot.cmd 'hello', (speaker) ->
         this.speak "Hello there, #{speaker.name}"
       
       # Basic ping function
-      bot.on '^!ping', (command, speaker) ->
+      bot.cmd 'ping', (speaker) ->
         this.speak 'Pong!'
         
       # Spit out what tricks this doggy knows
-      bot.on '^!tricks', (command, speaker) ->
+      bot.cmd 'tricks', (speaker) ->
         tricks = for trick of bot.tricks() when trick != 'catchAll'
           trick.replace(/\^/, '').split(' ')[0]
           
