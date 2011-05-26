@@ -26,6 +26,9 @@ fs.readFile 'config.yml', "utf8", (e, data) ->
       bot.cmd 'pt', (speaker, story_id) ->
         this.speak "https://www.pivotaltracker.com/story/show/#{story_id}"
 
+      bot.cmd 'gist', (speaker, gist) ->
+        this.speak "https://gist.github.com/#{gist}"
+
       bot.cmd 'hello', (speaker) ->
         this.speak "Hello there, #{speaker.name}"
       
